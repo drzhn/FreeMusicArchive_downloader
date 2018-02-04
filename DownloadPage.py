@@ -24,6 +24,7 @@ def check_license(url):
                 return False, item
             else:
                 return True, item
+    return False, ""
 
 
 def get_audios_from_page(url, params):
@@ -59,7 +60,7 @@ def download_genre(url, num_start, num_end):
         params = {'sort': 'track_date_published', 'page': str(i)}
         tracks += get_audios_from_page(url, params)
         print(i, " page done")
-    print(str(len(tracks))+" in common")
+    print(str(len(tracks))+" files in common")
     file_info = open("info.txt", "w")
     i = 0
     for track in tracks:
@@ -80,8 +81,9 @@ def download_genre(url, num_start, num_end):
 
 if not os.path.isdir("audios"):
     os.mkdir("audios")
-url = "http://freemusicarchive.org/genre/Opera/"
+url = "http://freemusicarchive.org/genre/Ambient_Electronic/"
 num = get_num_pages(url)
+print(num, " pages")
 download_genre(url, 1,num+1)
 
 
